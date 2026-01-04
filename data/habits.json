@@ -1,0 +1,22 @@
+{
+  "smoking": {
+    "keywords": ["smoke", "cigarette", "tobacco", "vape"],
+    "risk_factor": "High",
+    "associated_diseases": ["Lung Cancer", "COPD", "Heart Disease"]
+  },
+  "alcohol": {
+    "keywords": ["drink", "beer", "wine", "liquor", "alcohol"],
+    "risk_factor": "Medium",
+    "associated_diseases": ["Liver Cirrhosis", "Hypertension"]
+  },
+  "sedentary": {
+    "keywords": ["sitting", "desk job", "no exercise", "lazy"],
+    "risk_factor": "Medium",
+    "associated_diseases": ["Obesity", "Diabetes", "Cardiovascular Disease"]
+  },
+  "poor_diet": {
+    "keywords": ["fast food", "sugar", "soda", "fried"],
+    "risk_factor": "High",
+    "associated_diseases": ["Diabetes", "Obesity", "Hypertension"]
+  }
+}

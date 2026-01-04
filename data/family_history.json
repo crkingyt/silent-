@@ -1,0 +1,27 @@
+[
+  {
+    "patient_id": 101,
+    "conditions": [
+      {
+        "relation": "Father",
+        "condition": "Type 2 Diabetes",
+        "age_of_onset": 55
+      },
+      {
+        "relation": "Grandmother (Maternal)",
+        "condition": "Hypertension",
+        "age_of_onset": 60
+      }
+    ]
+  },
+  {
+    "patient_id": 102,
+    "conditions": [
+      {
+        "relation": "Mother",
+        "condition": "Breast Cancer",
+        "age_of_onset": 50
+      }
+    ]
+  }
+]

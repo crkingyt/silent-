@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../backend:/app
+      - ../../ai_engine:/ai_engine
+    environment:
+      - PYTHONPATH=/app:/
+    restart: always
+
+  frontend:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ../../frontend:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
