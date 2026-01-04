@@ -2,7 +2,7 @@
 
 import Sidebar from "@/components/common/Sidebar";
 import HabitRemedyCard from "@/components/recommendations/HabitRemedyCard";
-import { Utensils, Moon, Activity, ArrowRight, CheckCircle, AlertCircle, Cigarette, Loader2 } from "lucide-react";
+import { Utensils, Moon, Activity, ArrowRight, CheckCircle, AlertCircle, Cigarette, Loader2, Flame, Apple } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function RecommendationsPage() {
@@ -137,6 +137,20 @@ export default function RecommendationsPage() {
                               </div>
                               <p className="text-gray-300 text-sm mb-3">{rec.reason}</p>
                               
+                              {rec.calories_burned && (
+                                <div className="mb-2 text-sm text-orange-300 flex items-center gap-2 bg-orange-500/10 p-2 rounded-lg border border-orange-500/20">
+                                    <Flame size={14} className="text-orange-400" /> 
+                                    <span><span className="font-semibold">Burn:</span> {rec.calories_burned}</span>
+                                </div>
+                              )}
+                              
+                              {rec.dietary_suggestions && (
+                                <div className="mb-2 text-sm text-green-300 flex items-center gap-2 bg-green-500/10 p-2 rounded-lg border border-green-500/20">
+                                    <Apple size={14} className="text-green-400" /> 
+                                    <span><span className="font-semibold">Eat:</span> {rec.dietary_suggestions}</span>
+                                </div>
+                              )}
+
                               <div className="space-y-2">
                                 {rec.actions.map((action: string, i: number) => (
                                   <div key={i} className="flex items-start gap-2 text-sm text-gray-400">

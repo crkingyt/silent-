@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any
 from app.core.memory_store import store
+from app.services.recommendation_engine import RecommendationEngine
 import sys
 import os
 
@@ -16,87 +17,29 @@ except ImportError:
     risk_engine = MockRiskEngine()
 
 router = APIRouter()
+recommendation_engine = RecommendationEngine()
 
 @router.get("/")
 def get_recommendations():
     state = store.get()
     
-    recommendations = {
-        "critical_actions": [],
-        "daily_improvements": []
-    }
+    # Use AI engine to generate recommendations based on the current state
+    recommendations = recommendation_engine.generate_recommendations(state)
+    
+    # Post-process to add colors for frontend display
+    for item in recommendations.get("daily_improvements", []):
+        if item.get("icon") == "Moon":
+            item["color"] = "text-indigo-400"
+            item["bgColor"] = "bg-indigo-500/20"
+        elif item.get("icon") == "Utensils":
+            item["color"] = "text-green-400"
+            item["bgColor"] = "bg-green-500/20"
+        else: # Activity or default
+            item["color"] = "text-blue-400"
+            item["bgColor"] = "bg-blue-500/20"
+            
+    return recommendations
 
-    # Rule 1: Smoking
-    if "Smoking" in state["detected_habits"]:
-        recommendations["critical_actions"].append({
-            "habit": "Smoking",
-            "riskIncrease": "45%",
-            "remedySteps": [
-                "Set a quit date within the next 2 weeks.",
-                "Identify triggers (stress, social situations).",
-                "Use nicotine replacement therapy if needed.",
-                "Practice deep breathing when cravings hit."
-            ],
-            "sideEffects": [
-                "Increased Heart Rate",
-                "Hypertension",
-                "Reduced Lung Capacity"
-            ]
-        })
-
-    # Rule 2: Sleep
-    if state["sleep_issues"]:
-        recommendations["daily_improvements"].append({
-            "id": 2,
-            "category": "Sleep Hygiene",
-            "icon": "Moon",
-            "color": "text-indigo-400",
-            "bgColor": "bg-indigo-500/20",
-            "title": "Improve Sleep Consistency",
-            "priority": "Medium",
-            "reason": "Sleep duration has been variable or issues detected.",
-            "actions": [
-                "Set a consistent bedtime (e.g., 10:30 PM).",
-                "Avoid screens 1 hour before bed.",
-                "Keep bedroom temperature cool (around 65°F/18°C)."
-            ]
-        })
-
-    # Rule 3: Stress (High) -> Suggest Steps/Meditation
-    if state["stress_level"] == "High":
-        recommendations["daily_improvements"].append({
-            "id": 3,
-            "category": "Mental Wellness",
-            "icon": "Activity",
-            "color": "text-blue-400",
-            "bgColor": "bg-blue-500/20",
-            "title": "Manage High Stress",
-            "priority": "High",
-            "reason": "High stress levels detected in recent logs.",
-            "actions": [
-                "Practice 4-7-8 breathing technique.",
-                "Take a 15-minute walk to decompress.",
-                "Limit caffeine intake."
-            ]
-        })
-
-    # Rule 4: High Risks (Diabetes, Hypertension, etc.)
-    risks = state.get("risks", {})
-    if risks.get("diabetes", 0) > 20.0:
-        recommendations["critical_actions"].append({
-            "habit": "High Blood Sugar Risk",
-            "riskIncrease": f"{risks['diabetes']}%",
-            "remedySteps": [
-                "Monitor blood glucose levels regularly.",
-                "Reduce carbohydrate intake.",
-                "Consult a healthcare provider."
-            ],
-            "sideEffects": [
-                "Fatigue",
-                "Frequent Urination",
-                "Vision Issues"
-            ]
-        })
     
     if risks.get("hypertension", 0) > 20.0:
         recommendations["critical_actions"].append({

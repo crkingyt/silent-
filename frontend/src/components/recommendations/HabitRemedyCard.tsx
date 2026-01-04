@@ -50,7 +50,7 @@ const HabitRemedyCard: React.FC<HabitRemedyProps> = ({ habit, riskIncrease, reme
         <div>
           <h4 className="text-blue-200 text-sm font-semibold mb-2">Side Effects</h4>
           <div className="flex flex-wrap gap-2">
-            {sideEffects.map((effect, index) => (
+            {(sideEffects || []).map((effect, index) => (
               <span key={index} className="px-3 py-1 bg-red-500/20 text-red-200 text-xs rounded-full border border-red-500/30">
                 {effect}
               </span>
@@ -61,7 +61,7 @@ const HabitRemedyCard: React.FC<HabitRemedyProps> = ({ habit, riskIncrease, reme
         <div>
           <h4 className="text-emerald-200 text-sm font-semibold mb-2">Steps to Quit</h4>
           <ul className="space-y-2">
-            {remedySteps.map((step, index) => (
+            {(remedySteps || []).map((step, index) => (
               <li key={index} className="flex items-start gap-2 text-gray-300 text-sm">
                 <CheckCircle size={16} className="text-emerald-400 mt-0.5 shrink-0" />
                 <span>{step}</span>

@@ -1,13 +1,16 @@
-import { ArrowUp, ArrowDown, Minus } from "lucide-react";
+import { ArrowUp, ArrowDown, Minus, ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 interface RiskCardProps {
   title: string;
   riskPercentage: number;
   trend: "increasing" | "decreasing" | "stable";
   description: string;
+  mitigation?: string;
 }
 
-export default function RiskCard({ title, riskPercentage, trend, description }: RiskCardProps) {
+export default function RiskCard({ title, riskPercentage, trend, description, mitigation }: RiskCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
   let trendColor = "text-gray-500";
   let TrendIcon = Minus;
 
@@ -26,7 +29,10 @@ export default function RiskCard({ title, riskPercentage, trend, description }: 
   };
 
   return (
-    <div className="rounded-lg bg-white p-6 shadow-sm border border-gray-100">
+    <div 
+      className={`rounded-lg bg-white p-6 shadow-sm border border-gray-100 transition-all duration-300 cursor-pointer hover:shadow-md ${isExpanded ? 'ring-2 ring-blue-500 ring-opacity-50' : ''}`}
+      onClick={() => setIsExpanded(!isExpanded)}
+    >
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-medium text-gray-900">{title}</h3>
         <span
@@ -54,6 +60,25 @@ export default function RiskCard({ title, riskPercentage, trend, description }: 
           style={{ width: `${riskPercentage}%` }}
         ></div>
       </div>
+      
+      {mitigation && (
+        <div className={`mt-4 overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="pt-4 border-t border-gray-100">
+            <h4 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
+              How to overcome
+            </h4>
+            <p className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg border border-blue-100">
+              {mitigation}
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {mitigation && (
+        <div className="mt-2 flex justify-center">
+            {isExpanded ? <ChevronUp className="h-4 w-4 text-gray-400" /> : <ChevronDown className="h-4 w-4 text-gray-400" />}
+        </div>
+      )}
     </div>
   );
 }

@@ -13,30 +13,35 @@ export default function PatientDashboard() {
       riskPercentage: 71,
       trend: "increasing" as const,
       description: "Insulin resistance markers detected. Sugar intake high.",
+      mitigation: "Reduce sugar intake, increase fiber consumption, and engage in regular aerobic exercise to improve insulin sensitivity."
     },
     {
       title: "Hypertension Risk",
       riskPercentage: 58,
       trend: "stable" as const,
       description: "Blood pressure stable but elevated. Stress levels moderate.",
+      mitigation: "Practice stress management techniques like meditation, reduce sodium intake, and maintain a regular sleep schedule."
     },
     {
       title: "Cardiac Risk",
       riskPercentage: 42,
       trend: "stable" as const,
       description: "Cholesterol levels slightly elevated. Activity level needs improvement.",
+      mitigation: "Adopt a heart-healthy diet low in saturated fats and aim for at least 150 minutes of moderate-intensity exercise per week."
     },
     {
       title: "Liver Disorder Risk",
       riskPercentage: 25,
       trend: "decreasing" as const,
       description: "Liver enzymes within normal range. Good hydration.",
+      mitigation: "Maintain current healthy habits, limit alcohol consumption, and continue staying well-hydrated."
     },
     {
       title: "Mental Health Stress",
       riskPercentage: 76,
       trend: "increasing" as const,
       description: "Sleep deprivation and high stress reported.",
+      mitigation: "Prioritize sleep hygiene, consider cognitive behavioral therapy (CBT) techniques, and schedule regular relaxation breaks."
     },
   ];
 

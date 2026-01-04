@@ -3,6 +3,7 @@
 import { Users, Activity, AlertTriangle, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import { doctorService } from "@/services/doctor";
+import Link from "next/link";
 
 interface Patient {
   id: number;
@@ -112,7 +113,7 @@ export default function DoctorDashboard() {
         <ul role="list" className="divide-y divide-slate-100">
           {patients.map((patient) => (
             <li key={patient.id} className="hover:bg-slate-50 transition-colors">
-              <div className="px-6 py-5 sm:px-6">
+              <Link href={`/dashboard/doctor/patients/${patient.id}`} className="block px-6 py-5 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center min-w-0 gap-x-4">
                     <div className="h-12 w-12 flex-none rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-lg">
@@ -142,7 +143,7 @@ export default function DoctorDashboard() {
                     <p className="text-xs text-slate-400">Visited {patient.lastVisit}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             </li>
           ))}
         </ul>

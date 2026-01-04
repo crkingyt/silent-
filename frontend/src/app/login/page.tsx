@@ -17,7 +17,7 @@ function LoginForm() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (role === "doctor") {
-      router.push("/doctor-onboarding");
+      router.push("/dashboard/doctor");
     } else {
       router.push("/dashboard/patient");
     }
@@ -25,7 +25,7 @@ function LoginForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-400 via-blue-500 to-indigo-600 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      
+
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
@@ -42,9 +42,9 @@ function LoginForm() {
           <div className="text-center">
             <div className={`mx-auto h-20 w-20 rounded-full flex items-center justify-center mb-6 shadow-lg transition-all duration-300 transform ${role === 'doctor' ? 'bg-teal-100 rotate-12' : 'bg-blue-100 -rotate-12'}`}>
               {role === 'doctor' ? (
-                 <Stethoscope className="h-10 w-10 text-teal-600" />
+                <Stethoscope className="h-10 w-10 text-teal-600" />
               ) : (
-                 <User className="h-10 w-10 text-blue-600" />
+                <User className="h-10 w-10 text-blue-600" />
               )}
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">
@@ -60,21 +60,19 @@ function LoginForm() {
             <div className="flex justify-center p-1.5 bg-gray-100 rounded-2xl mb-8">
               <button
                 onClick={() => setRole("patient")}
-                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
-                  role === "patient"
+                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${role === "patient"
                     ? "bg-white text-blue-600 shadow-md transform scale-105"
                     : "text-gray-500 hover:text-gray-700"
-                }`}
+                  }`}
               >
                 Patient
               </button>
               <button
                 onClick={() => setRole("doctor")}
-                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
-                  role === "doctor"
+                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${role === "doctor"
                     ? "bg-white text-teal-600 shadow-md transform scale-105"
                     : "text-gray-500 hover:text-gray-700"
-                }`}
+                  }`}
               >
                 Doctor
               </button>

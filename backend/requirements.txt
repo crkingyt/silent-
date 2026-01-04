@@ -6,6 +6,9 @@ python-dotenv==1.0.1
 httpx==0.26.0
 pandas
 numpy
-scikit-learn
+scikit-learn==1.7.2
 joblib
 deep-translator
+google-generativeai
+email-validator
+
