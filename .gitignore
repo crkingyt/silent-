@@ -1,7 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
+*.class
 *.so
 .Python
 build/
@@ -30,6 +30,10 @@ ENV/
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# Next.js
+.next/
+out/
 
 # Environment Variables
 .env
